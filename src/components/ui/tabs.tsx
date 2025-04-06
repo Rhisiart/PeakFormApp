@@ -1,7 +1,7 @@
+import * as TabsPrimitive from '@rn-primitives/tabs';
 import * as React from 'react';
-import { cn } from '../../lib/utils';
-import * as TabsPrimitive from '../primitives/tabs';
-import { TextClassContext } from './text';
+import { cn } from '~/lib/utils';
+import { TextClassContext } from '~/components/ui/text';
 
 const Tabs = TabsPrimitive.Root;
 
@@ -60,4 +60,3 @@ const TabsContent = React.forwardRef<TabsPrimitive.ContentRef, TabsPrimitive.Con
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
 export { Tabs, TabsContent, TabsList, TabsTrigger };
-

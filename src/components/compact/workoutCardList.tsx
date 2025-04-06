@@ -1,5 +1,5 @@
-import { useWorkoutForDay } from "@/src/hooks/useWorkoutForDay";
 import { FC } from "react";
+import { useWorkoutForDay } from "~/hooks/useWorkoutForDay";
 import { View } from "../primitives/slot";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { TabsContent } from "../ui/tabs";

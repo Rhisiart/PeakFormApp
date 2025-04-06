@@ -1,10 +1,11 @@
-import WorkoutCardList from "@/src/components/compact/workoutCardList";
-import { Tabs, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
-import { getCurrentWeekDays } from "@/src/lib/date";
+import { Tabs } from "expo-router";
 import { useReducer, useState } from "react";
 import { View } from "react-native";
-import { Directions, Gesture, GestureDetector } from "react-native-gesture-handler";
-import { Text } from "../../components/ui/text";
+import { Directions, Gesture } from "react-native-gesture-handler";
+import { Card, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
+import { TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { Text } from "~/components/ui/text";
+import { getCurrentWeekDays } from "~/lib/date";
 
 type reduceAction = "increase" | "decrease";
 
@@ -46,30 +47,41 @@ export default function Calender() {
   }
 
   return (
-    <View className="flex-1 justify-center p-6">
-      <Tabs
-        value={value}
-        onValueChange={onChangeTab}
-        className="w-full max-w-[400px] mx-auto flex-col gap-1.5"
-      >
-        <GestureDetector gesture={flingGestureLeft}>
-          <GestureDetector gesture={flingGestureRight}>
-            <TabsList className="flex-row w-full">
-              {days.map(day => {
-                return (
-                  <TabsTrigger value={day.toString()}>
-                    <Text>{day.toString()}</Text>
-                  </TabsTrigger>
-              )})} 
-            </TabsList>
-          </GestureDetector>
-        </GestureDetector>
-        <WorkoutCardList 
-          accountId="123" 
-          workoutId="123" 
-          day={selectedDay}
-        />
-      </Tabs>
-    </View>
+  <View className='flex-1 justify-center p-6'>
+    <Tabs
+      value={value}
+      onValueChange={setValue}
+      className='w-full max-w-[400px] mx-auto flex-col gap-1.5'
+    >
+      <TabsList className='flex-row w-full'>
+        <TabsTrigger value='account' className='flex-1'>
+          <Text>Account</Text>
+        </TabsTrigger>
+        <TabsTrigger value='password' className='flex-1'>
+          <Text>Password</Text>
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value='account'>
+        <Card>
+          <CardHeader>
+            <CardTitle>Account</CardTitle>
+            <CardDescription>
+              Make changes to your account here. Click save when you're done.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </TabsContent>
+      <TabsContent value='password'>
+        <Card>
+          <CardHeader>
+            <CardTitle>Password</CardTitle>
+            <CardDescription>
+              Change your password here. After saving, you'll be logged out.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  </View>
   );
 }
