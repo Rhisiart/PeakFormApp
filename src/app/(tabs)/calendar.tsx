@@ -68,9 +68,8 @@ export default function Calender() {
             return (
               <WorkoutTabContent
                 key={day.getDate().toString()}
-                accountId="123"
+                accountId="8bbc1d23-80d9-4fed-8079-f35e7504950e"
                 day={day}
-                workoutId="123"
               />
             );
           })}
