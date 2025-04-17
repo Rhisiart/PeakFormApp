@@ -4,22 +4,24 @@ import { View } from 'react-native';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Text } from '../ui/text';
 
+import { Exercise } from '~/types/types';
+
 interface IProps {
-  day: Date;
+  exercise: Exercise;
 }
 
-const WorkoutCard: FC<IProps> = ({ day }) => {
+const WorkoutCard: FC<IProps> = ({ exercise }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{day.getDate().toString()}</CardTitle>
-        <CardDescription>{day.getDate().toString()}</CardDescription>
+        <CardTitle>{exercise.name}</CardTitle>
+        <CardDescription>{exercise.muscleGroup}</CardDescription>
       </CardHeader>
       <CardContent>
         <View />
       </CardContent>
       <CardFooter>
-        <Text>3 sets x 6-8 reps x 67.5 kg</Text>
+        <Text>{`${exercise.sets} sets x ${exercise.reps} reps x ${exercise.weight}kg`}</Text>
       </CardFooter>
     </Card>
   );

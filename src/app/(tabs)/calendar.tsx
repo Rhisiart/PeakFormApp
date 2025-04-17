@@ -1,38 +1,47 @@
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { View } from 'react-native';
-import { Directions, Gesture } from 'react-native-gesture-handler';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import WorkoutTabContent from '~/components/compact/WorkoutTabContent';
 import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { Text } from '~/components/ui/text';
-import { getCurrentWeekDays } from '~/lib/date';
+import { getCurrentWeekDays, isToday } from '~/lib/date';
 
-type reduceAction = 'increase' | 'decrease';
+type ReduceAction = 'increase' | 'decrease';
 
 export default function Calender() {
   const [value, setValue] = useState<string>(new Date().getDate().toString());
-
-  const reducer = (state: number, action: reduceAction) => {
+  const [weekOffset, dispatch] = useReducer((state: number, action: ReduceAction) => {
     return action === 'increase' ? state + 1 : state - 1;
-  };
+  }, 0);
+  const [days, setDays] = useState<Date[]>([]);
 
-  const [state, dispatch] = useReducer(reducer, 0);
-  const days = getCurrentWeekDays(state);
-
-  const flingGestureRight = Gesture.Fling()
-    .direction(Directions.RIGHT)
-    .numberOfPointers(1)
-    .onBegin((e) => dispatch('decrease'))
-    .onStart((e) => {})
+  const pan = Gesture.Pan()
+    .onEnd((e) => {
+      //const swipeDirection = e.translationX < -50 ? 'right' : 'left';
+      const offset = e.translationX;
+      if (offset < -50) {
+        dispatch('increase');
+      } else if (offset > 50) {
+        dispatch('decrease');
+      }
+    })
     .runOnJS(true);
 
-  const flingGestureLeft = Gesture.Fling()
-    .direction(Directions.LEFT)
-    .numberOfPointers(1)
-    .onBegin((e) => dispatch('increase'))
-    .onStart((e) => {})
-    .runOnJS(true);
+  useEffect(() => {
+    console.log(`offset = ${weekOffset}`);
+    const currentDays = getCurrentWeekDays(weekOffset);
+    const includeTodayDate = currentDays.some((x) => isToday(x));
+    const selectedDay = includeTodayDate
+      ? new Date().getDate().toString()
+      : currentDays[0].getDate().toString();
+
+    console.log(`selected day = ${selectedDay}`);
+
+    setDays(currentDays);
+    setValue(selectedDay);
+  }, [weekOffset]);
 
   return (
     <SafeAreaView>
@@ -41,18 +50,20 @@ export default function Calender() {
           value={value}
           onValueChange={setValue}
           className="mx-auto w-full max-w-[400px] flex-col gap-1.5">
-          <TabsList className="w-full flex-row">
-            {days.map((day) => {
-              return (
-                <TabsTrigger
-                  key={day.getDate().toString()}
-                  value={day.getDate().toString()}
-                  className="flex-1">
-                  <Text>{day.getDate().toString()}</Text>
-                </TabsTrigger>
-              );
-            })}
-          </TabsList>
+          <GestureDetector gesture={pan}>
+            <TabsList className="w-full flex-row">
+              {days.map((day) => {
+                return (
+                  <TabsTrigger
+                    key={day.getDate().toString()}
+                    value={day.getDate().toString()}
+                    className="flex-1">
+                    <Text>{day.getDate().toString()}</Text>
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+          </GestureDetector>
           {days.map((day) => {
             return (
               <WorkoutTabContent
