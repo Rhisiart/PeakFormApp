@@ -6,9 +6,10 @@ import * as React from 'react';
 import { Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { NAV_THEME } from '~/lib/constants';
+import { useColorScheme } from '~/lib/useColorScheme';
 import '../../global.css';
-import { NAV_THEME } from '../lib/constants';
-import { useColorScheme } from '../lib/useColorScheme';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
