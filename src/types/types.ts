@@ -5,8 +5,10 @@ export type Exercise = {
   reps: number;
   sets: number;
   weight: number;
+  duration: number;
   rest: number;
   notes: string;
+  videoUrl: string;
 };
 
 export type Workout = {

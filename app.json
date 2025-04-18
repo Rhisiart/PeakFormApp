@@ -3,14 +3,20 @@
     "name": "PeakForm",
     "slug": "peakform",
     "version": "1.0.0",
-    "web": {
-    },
+    "web": {},
     "experiments": {
       "tsconfigPaths": true
     },
     "newArchEnabled": true,
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-video",
+        {
+          "supportsBackgroundPlayback": true,
+          "supportsPictureInPicture": true
+        }
+      ]
     ],
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",

@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import WorkoutTabContent from '~/components/compact/WorkoutTabContent';
+import WorkoutTabContent from '~/components/compact/workoutTabContent';
 import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { Text } from '~/components/ui/text';
 import { getCurrentWeekDays, isToday } from '~/lib/date';
@@ -30,14 +30,11 @@ export default function Calender() {
     .runOnJS(true);
 
   useEffect(() => {
-    console.log(`offset = ${weekOffset}`);
     const currentDays = getCurrentWeekDays(weekOffset);
     const includeTodayDate = currentDays.some((x) => isToday(x));
     const selectedDay = includeTodayDate
       ? new Date().getDate().toString()
       : currentDays[0].getDate().toString();
-
-    console.log(`selected day = ${selectedDay}`);
 
     setDays(currentDays);
     setValue(selectedDay);

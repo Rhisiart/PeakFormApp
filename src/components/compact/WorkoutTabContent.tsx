@@ -15,8 +15,8 @@ const WorkoutTabContent: FC<IProps> = ({ accountId, day }) => {
   const { data, isLoading, error } = useWorkoutForDay(accountId, day);
 
   return (
-    <ScrollView>
-      <TabsContent value={day.getDate().toString()}>
+    <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
+      <TabsContent className="gap-4" value={day.getDate().toString()}>
         {data &&
           data.exercises &&
           data.exercises.map((exercise) => {
