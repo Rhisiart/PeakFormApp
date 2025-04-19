@@ -11,10 +11,14 @@
     "plugins": [
       "expo-router",
       [
-        "expo-video",
-        {
+        "expo-video", {
           "supportsBackgroundPlayback": true,
           "supportsPictureInPicture": true
+        }
+      ],
+      [
+        "expo-asset", {
+          "assets": ["./src/lib/images/chest.jpg"]
         }
       ]
     ],

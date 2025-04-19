@@ -1,7 +1,20 @@
+type MuscleGroup =
+  | 'Abs'
+  | 'Adductiors'
+  | 'Back'
+  | 'Calves'
+  | 'Chest'
+  | 'Forearm'
+  | 'Glutes'
+  | 'Hamstring'
+  | 'Heck'
+  | 'Quadriceps'
+  | 'Shoulder';
+
 export type Exercise = {
   id: string;
   name: string;
-  muscleGroup: string;
+  muscleGroup: MuscleGroup;
   reps: number;
   sets: number;
   weight: number;
