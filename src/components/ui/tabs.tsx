@@ -11,7 +11,7 @@ const TabsList = React.forwardRef<TabsPrimitive.ListRef, TabsPrimitive.ListProps
     <TabsPrimitive.List
       ref={ref}
       className={cn(
-        'native:h-12 bg-muted native:px-1.5 h-10 items-center justify-center rounded-md p-1 web:inline-flex',
+        'native:h-14 native:px-1.5 m-4 h-10 items-center justify-center gap-1 rounded-md bg-muted web:inline-flex',
         className
       )}
       {...props}
@@ -32,9 +32,9 @@ const TabsTrigger = React.forwardRef<TabsPrimitive.TriggerRef, TabsPrimitive.Tri
         <TabsPrimitive.Trigger
           ref={ref}
           className={cn(
-            'web:ring-offset-background web:focus-visible:ring-ring inline-flex items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium shadow-none web:whitespace-nowrap web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-offset-2',
+            'm-1 inline-flex w-12 items-center justify-center rounded-lg bg-border/50 px-3 py-3 text-sm font-medium shadow-lg shadow-none shadow-foreground/10 web:whitespace-nowrap web:ring-offset-background web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
             props.disabled && 'opacity-50 web:pointer-events-none',
-            props.value === value && 'bg-background shadow-foreground/10 shadow-lg',
+            props.value === value && 'bg-yellow-500 shadow-lg shadow-foreground/10',
             className
           )}
           {...props}
@@ -50,7 +50,7 @@ const TabsContent = React.forwardRef<TabsPrimitive.ContentRef, TabsPrimitive.Con
     <TabsPrimitive.Content
       ref={ref}
       className={cn(
-        'web:ring-offset-background web:focus-visible:ring-ring web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-offset-2',
+        'web:ring-offset-background web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
         className
       )}
       {...props}

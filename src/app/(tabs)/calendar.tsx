@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -42,19 +42,14 @@ export default function Calender() {
 
   return (
     <SafeAreaView>
-      <View className="flex-1 justify-center p-6">
-        <Tabs
-          value={value}
-          onValueChange={setValue}
-          className="mx-auto w-full max-w-[400px] flex-col gap-1.5">
+      <View className="flex-1 justify-center" style={styles.container}>
+        <Tabs value={value} onValueChange={setValue}>
           <GestureDetector gesture={pan}>
-            <TabsList className="w-full flex-row">
+            <TabsList className="flex-row bg-transparent">
               {days.map((day) => {
                 return (
-                  <TabsTrigger
-                    key={day.getDate().toString()}
-                    value={day.getDate().toString()}
-                    className="flex-1">
+                  <TabsTrigger key={day.getDate().toString()} value={day.getDate().toString()}>
+                    <Text>{day.toLocaleDateString('en-EN', { weekday: 'narrow' })}</Text>
                     <Text>{day.getDate().toString()}</Text>
                   </TabsTrigger>
                 );
@@ -75,3 +70,10 @@ export default function Calender() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingLeft: 24,
+    paddingRight: 25,
+  },
+});

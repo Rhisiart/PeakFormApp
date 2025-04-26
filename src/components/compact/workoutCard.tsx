@@ -3,11 +3,10 @@ import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Text } from '../ui/text';
 import { H4 } from '../ui/typography';
 
-import { ArrowRightLeft } from '~/lib/icons/arrow-right-left';
 import { Dumbbell } from '~/lib/icons/dumbbell';
 import { TimerReset } from '~/lib/icons/timer-reset';
 import { Weight } from '~/lib/icons/weight';
@@ -48,7 +47,7 @@ const WorkoutCard: FC<IProps> = ({ exercise }) => {
                         : require('../../lib/images/shoulder.jpg');
 
   return (
-    <Card className="h-96 w-full overflow-hidden rounded-3xl">
+    <Card className="my-2 h-96 w-full overflow-hidden rounded-3xl">
       <VideoView
         style={StyleSheet.absoluteFill}
         player={player}
@@ -57,7 +56,7 @@ const WorkoutCard: FC<IProps> = ({ exercise }) => {
         nativeControls={false}
         contentFit="cover"
       />
-      <CardHeader className="h-2/3 flex-row justify-between">
+      <CardHeader className="h-2/3">
         <CardTitle>
           <Avatar alt={`${exercise.muscleGroup} ${exercise.name}`} className="h-14 w-14">
             <AvatarImage source={avatarImage} />
@@ -66,11 +65,8 @@ const WorkoutCard: FC<IProps> = ({ exercise }) => {
             </AvatarFallback>
           </Avatar>
         </CardTitle>
-        <CardDescription>
-          <ArrowRightLeft className="h-14 w-14 text-yellow-500" />
-        </CardDescription>
       </CardHeader>
-      <CardFooter className="m-2 rounded-xl bg-black/30 p-4">
+      <CardFooter className="m-2 rounded-xl bg-border/30 p-4">
         <View>
           <View className="mb-2">
             <H4>{exercise.name}</H4>

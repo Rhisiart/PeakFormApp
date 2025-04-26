@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { TabsContent } from '../ui/tabs';
-import WorkoutCard from './workoutCard';
+import WorkoutDetail from './WorkoutDetail';
 
 import { useWorkoutForDay } from '~/hooks/useWorkoutForDay';
 
@@ -17,11 +17,7 @@ const WorkoutTabContent: FC<IProps> = ({ accountId, day }) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
       <TabsContent className="gap-4" value={day.getDate().toString()}>
-        {data &&
-          data.exercises &&
-          data.exercises.map((exercise) => {
-            return <WorkoutCard key={exercise.id} exercise={exercise} />;
-          })}
+        {data && <WorkoutDetail workout={data} />}
       </TabsContent>
     </ScrollView>
   );

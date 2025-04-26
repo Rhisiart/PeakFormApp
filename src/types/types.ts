@@ -31,5 +31,6 @@ export type Workout = {
   workoutType: string;
   difficulty: string;
   caloriesEstimate: number;
+  duration: number;
   exercises: Exercise[];
 };
